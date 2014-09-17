@@ -16,7 +16,9 @@ public class Stroke
 public class Songs : MonoBehaviour
 {
     public static readonly float BPS = 1f; // Beats per second
-    public static readonly float BEAT_SIZE = 1.25f;
+    public static readonly float BEAT_SIZE = 1.5f;
+    public static readonly float NOTE_SIZE = 1.4f; // Note width (starts at the same position as a beat)
+    public static readonly float NOTE_REST = BEAT_SIZE - NOTE_SIZE;
     public static readonly float BEAT_MOVE = BEAT_SIZE * BPS;
     Content content;
 
@@ -51,12 +53,13 @@ public class Songs : MonoBehaviour
         
         foreach (Stroke stroke in song)
         {
-            float y_pos = offset + (stroke.Position + stroke.Length / 2) * BEAT_SIZE;
-            Vector3 pos = new Vector3(content.getXpos(stroke.Note), y_pos, -0.1f);
+            float y_pos = offset + stroke.Position * BEAT_SIZE;
+            Vector3 pos = new Vector3(content.getXpos(stroke.Note), y_pos, 0);
             GameObject note = (GameObject)Instantiate(note_res, pos, Quaternion.Euler(-90, 0, 0));
-            note.transform.localScale = new Vector3(0.125f, 1f, 0.125f * stroke.Length);
-            note.transform.FindChild("back").transform.localScale = new Vector3(1.1f, 1f, 1f + 0.1f / stroke.Length);
-            note.renderer.material.color = Values.colors[Values.getNoteIndex(stroke.Note)];
+            float length_scale = stroke.Length * BEAT_SIZE - NOTE_REST;
+            note.transform.localScale = new Vector3(NOTE_SIZE * 0.1f, 1f, length_scale * 0.1f );
+            note.transform.FindChild("front").transform.localScale = new Vector3(1f - 0.1f, 1f, 1f - (0.1f / stroke.Length));
+            note.transform.FindChild("front").renderer.material.color = Values.colors[Values.getNoteIndex(stroke.Note)];
             notes.Add(note);
         }
     }
