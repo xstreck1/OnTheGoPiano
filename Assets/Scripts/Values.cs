@@ -12,12 +12,12 @@ public class Values : MonoBehaviour
 {
     public static readonly List<Color> colors = new List<Color> {
             new Color(1f, 0f, 1f, 1f),
-            new Color(0.5f, 0.1f, 0.9f, 1f),
-            new Color(0.0f, 0.0f, 1f, 1f),
+            new Color(0.4f, 0.1f, 0.8f, 1f),
+            new Color(0.2f, 0.2f, 1f, 1f),
             new Color(0f, 1f, 1f, 1f),
             new Color(0f, 0.5f, 0f, 1f),
             new Color(1f, 1f, 0f, 1f),
-            new Color(1f, 0.5f, 0f, 1f),
+            new Color(0.9f, 0.5f, 0.1f, 1f),
             new Color(1f, 0f, 0f, 1f)
         };
 

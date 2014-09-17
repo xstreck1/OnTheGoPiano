@@ -29,7 +29,7 @@ public class Content : MonoBehaviour
             Vector3 back_pos = new Vector3(filed_X_pos[i], 0, 0);
             note_backs.Add((GameObject)Instantiate(note_back, back_pos, Quaternion.Euler(-90, 0, 0)));
             note_backs[i].transform.parent = this.transform;
-            note_backs[i].renderer.material.color = Values.colors[i] * 0.75f;
+            note_backs[i].renderer.material.color = Values.colors[i] * 0.25f;
             note_backs[i].name = field_names[i] + "_field";
 
 
