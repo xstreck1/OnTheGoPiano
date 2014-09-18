@@ -13,14 +13,16 @@ public class Stroke
     public float Length { get; internal set; }
 };
 
-public class Songs : MonoBehaviour
+public class SongInterface : MonoBehaviour
 {
     public static readonly float BPS = 1f; // Beats per second
-    public static readonly float BEAT_SIZE = 1.5f;
-    public static readonly float NOTE_SIZE = 1.4f; // Note width (starts at the same position as a beat)
-    public static readonly float NOTE_REST = BEAT_SIZE - NOTE_SIZE;
+    public static readonly float BEAT_SIZE = 1.4f;
     public static readonly float BEAT_MOVE = BEAT_SIZE * BPS;
+
+    float offset;
     Content content;
+    Object note_res;
+    Transform sond_holder;
 
     List<List<Stroke>> songs = new List<List<Stroke>>
     {
@@ -33,8 +35,8 @@ public class Songs : MonoBehaviour
             new Stroke() { Position = 0f, Note = Note.A1, Length = 1f },
             new Stroke() { Position = 0f, Note = Note.B1, Length = 1f },
             new Stroke() { Position = 0f, Note = Note.C2, Length = 1f },
-            new Stroke() { Position = 1f, Note = Note.C1, Length = 1f },
-            new Stroke() { Position = 2f, Note = Note.C1, Length = 1f },
+            new Stroke() { Position = 1f, Note = Note.D1, Length = 1f },
+            new Stroke() { Position = 2f, Note = Note.D1, Length = 1f },
             new Stroke() { Position = 3f, Note = Note.E1, Length = 1f },
             new Stroke() { Position = 4f, Note = Note.G1, Length = 1f },
             new Stroke() { Position = 5f, Note = Note.C1, Length = 1f },
@@ -48,18 +50,30 @@ public class Songs : MonoBehaviour
     void CreateSong(List<Stroke> song)
     {
         notes = new List<GameObject>();
-        var note_res = Resources.Load("note");
-        float offset = GameObject.Find("Main Camera").GetComponent<Camera>().orthographicSize;
         
         foreach (Stroke stroke in song)
         {
+            // Position
             float y_pos = offset + stroke.Position * BEAT_SIZE;
             Vector3 pos = new Vector3(content.getXpos(stroke.Note), y_pos, 0);
             GameObject note = (GameObject)Instantiate(note_res, pos, Quaternion.Euler(-90, 0, 0));
-            float length_scale = stroke.Length * BEAT_SIZE - NOTE_REST;
-            note.transform.localScale = new Vector3(NOTE_SIZE * 0.1f, 1f, length_scale * 0.1f );
+
+            // Scale
+            note.transform.localScale = new Vector3(BEAT_SIZE * 0.1f, 1f, stroke.Length * BEAT_SIZE * 0.1f );
             note.transform.FindChild("front").transform.localScale = new Vector3(1f - 0.1f, 1f, 1f - (0.1f / stroke.Length));
             note.transform.FindChild("front").renderer.material.color = Values.colors[Values.getNoteIndex(stroke.Note)];
+
+            // Data
+            NoteData note_data = note.GetComponent<NoteData>();
+            note_data.Note = stroke.Note;
+
+            // Inspector
+            note.transform.parent = sond_holder;
+            string name = Values.field_names[Values.getNoteIndex(stroke.Note)];
+            if (!Values.isFullNote(stroke.Note))
+                name = name[0] + "#";
+            note.name = name;
+
             notes.Add(note);
         }
     }
@@ -68,6 +82,9 @@ public class Songs : MonoBehaviour
     void Start()
     {
         content = GameObject.Find("Content").GetComponent<Content>();
+        offset = - GameObject.Find("Main Camera").GetComponent<Camera>().orthographicSize;
+        note_res = Resources.Load("note");
+        sond_holder = GameObject.Find("song").transform;
         CreateSong(songs[0]);
     }
 

@@ -32,6 +32,18 @@ public class Values : MonoBehaviour
         KeyCode.K
     };
 
+
+    public static readonly List<string> field_names = new List<string> {
+        "C1",
+        "D1",
+        "E1",
+        "F1",
+        "G1",
+        "A1",
+        "B1",
+        "C2"
+    };
+
     public static int getNoteIndex(Note note)
     {
         switch (note)

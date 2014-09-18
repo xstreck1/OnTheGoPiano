@@ -7,7 +7,7 @@ using CSharpSynth.Synthesis;
 using CSharpSynth.Midi;
 
 [RequireComponent(typeof(AudioSource))]
-public class Main : MonoBehaviour
+public class Syntetizer : MonoBehaviour
 {
     //Try also: "FM Bank/fm" or "Analog Bank/analog" for some different sounds
     public string bankFilePath = "GM Bank/gm";
@@ -41,63 +41,20 @@ public class Main : MonoBehaviour
 
     }
 
+    public void playNote(Note note)
+    {
+        midiStreamSynthesizer.NoteOn(1, midiNote + (int)note, midiNoteVolume, midiInstrument);
+    }
+
+    public void stopNote(Note note)
+    {
+        midiStreamSynthesizer.NoteOff(1, midiNote + (int)note);
+    }
+
     // Update is called every frame, if the
     // MonoBehaviour is enabled.
     void Update()
-    {
-        //Demo of direct note output
-        if (Input.GetKeyDown(KeyCode.A))
-            midiStreamSynthesizer.NoteOn(1, midiNote, midiNoteVolume, midiInstrument);
-        if (Input.GetKeyUp(KeyCode.A))
-            midiStreamSynthesizer.NoteOff(1, midiNote);
-        if (Input.GetKeyDown(KeyCode.W))
-            midiStreamSynthesizer.NoteOn(1, midiNote + 1, midiNoteVolume, midiInstrument);
-        if (Input.GetKeyUp(KeyCode.W))
-            midiStreamSynthesizer.NoteOff(1, midiNote + 1);
-        if (Input.GetKeyDown(KeyCode.S))
-            midiStreamSynthesizer.NoteOn(1, midiNote + 2, midiNoteVolume, midiInstrument);
-        if (Input.GetKeyUp(KeyCode.S))
-            midiStreamSynthesizer.NoteOff(1, midiNote + 2);
-        if (Input.GetKeyDown(KeyCode.E))
-            midiStreamSynthesizer.NoteOn(1, midiNote + 3, midiNoteVolume, midiInstrument);
-        if (Input.GetKeyUp(KeyCode.E))
-            midiStreamSynthesizer.NoteOff(1, midiNote + 3);
-        if (Input.GetKeyDown(KeyCode.D))
-            midiStreamSynthesizer.NoteOn(1, midiNote + 4, midiNoteVolume, midiInstrument);
-        if (Input.GetKeyUp(KeyCode.D))
-            midiStreamSynthesizer.NoteOff(1, midiNote + 4);
-        if (Input.GetKeyDown(KeyCode.F))
-            midiStreamSynthesizer.NoteOn(1, midiNote + 5, midiNoteVolume, midiInstrument);
-        if (Input.GetKeyUp(KeyCode.F))
-            midiStreamSynthesizer.NoteOff(1, midiNote + 5);
-        if (Input.GetKeyDown(KeyCode.T))
-            midiStreamSynthesizer.NoteOn(1, midiNote + 6, midiNoteVolume, midiInstrument);
-        if (Input.GetKeyUp(KeyCode.T))
-            midiStreamSynthesizer.NoteOff(1, midiNote + 6);
-        if (Input.GetKeyDown(KeyCode.G))
-            midiStreamSynthesizer.NoteOn(1, midiNote + 7, midiNoteVolume, midiInstrument);
-        if (Input.GetKeyUp(KeyCode.G))
-            midiStreamSynthesizer.NoteOff(1, midiNote + 7);
-        if (Input.GetKeyDown(KeyCode.Y))
-            midiStreamSynthesizer.NoteOn(1, midiNote + 8, midiNoteVolume, midiInstrument);
-        if (Input.GetKeyUp(KeyCode.Y))
-            midiStreamSynthesizer.NoteOff(1, midiNote + 8);
-        if (Input.GetKeyDown(KeyCode.H))
-            midiStreamSynthesizer.NoteOn(1, midiNote + 9, midiNoteVolume, midiInstrument);
-        if (Input.GetKeyUp(KeyCode.H))
-            midiStreamSynthesizer.NoteOff(1, midiNote + 9);
-        if (Input.GetKeyDown(KeyCode.U))
-            midiStreamSynthesizer.NoteOn(1, midiNote + 10, midiNoteVolume, midiInstrument);
-        if (Input.GetKeyUp(KeyCode.U))
-            midiStreamSynthesizer.NoteOff(1, midiNote + 10);
-        if (Input.GetKeyDown(KeyCode.J))
-            midiStreamSynthesizer.NoteOn(1, midiNote + 11, midiNoteVolume, midiInstrument);
-        if (Input.GetKeyUp(KeyCode.J))
-            midiStreamSynthesizer.NoteOff(1, midiNote + 11);
-        if (Input.GetKeyDown(KeyCode.K))
-            midiStreamSynthesizer.NoteOn(1, midiNote + 12, midiNoteVolume, midiInstrument);
-        if (Input.GetKeyUp(KeyCode.K))
-            midiStreamSynthesizer.NoteOff(1, midiNote + 12);
+    { 
     }
 
     // OnGUI is called for rendering and handling
@@ -113,10 +70,6 @@ public class Main : MonoBehaviour
         midiNoteVolume = (int)GUILayout.HorizontalSlider(midiNoteVolume, 0.0f, maxSliderValue);
         // End the Groups and Area	
         GUILayout.EndArea();
-
-        Event e = Event.current;
-        if (e.isKey)
-            Debug.Log("Detected key code: " + e.keyCode);
     }
 
     // This function is called when the object
