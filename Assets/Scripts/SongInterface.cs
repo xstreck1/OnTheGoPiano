@@ -64,7 +64,7 @@ public class SongInterface : MonoBehaviour
             note.transform.FindChild("front").renderer.material.color = Values.colors[Values.getNoteIndex(stroke.Note)];
 
             // Data
-            NoteData note_data = note.GetComponent<NoteData>();
+            NoteData note_data = note.transform.Find("back").GetComponent<NoteData>();
             note_data.Note = stroke.Note;
 
             // Inspector
@@ -82,7 +82,7 @@ public class SongInterface : MonoBehaviour
     void Start()
     {
         content = GameObject.Find("Content").GetComponent<Content>();
-        offset = - GameObject.Find("Main Camera").GetComponent<Camera>().orthographicSize;
+        offset = 0; // GameObject.Find("Main Camera").GetComponent<Camera>().orthographicSize;
         note_res = Resources.Load("note");
         sond_holder = GameObject.Find("song").transform;
         CreateSong(songs[0]);

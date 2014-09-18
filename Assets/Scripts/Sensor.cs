@@ -5,7 +5,7 @@ public class Sensor : MonoBehaviour {
     int index; // What is my id
     Syntetizer synthetizer;
     bool playing = false;
-    Note playing_note;
+    NoteData playing_note;
 
 	// Use this for initialization
 	void Start () {
@@ -24,23 +24,33 @@ public class Sensor : MonoBehaviour {
         if (Physics.Raycast(transform.position, Vector3.forward, out hit_info, Mathf.Infinity, 1 << 8))
         {
             NoteData note_data = hit_info.collider.GetComponent<NoteData>();
-            if (Input.GetKeyDown(my_key))
+            if (Input.GetKeyDown(my_key) && !note_data.Stroked)
             {
-                Debug.Log("Playing note " + (int) note_data.Note);
                 synthetizer.playNote(note_data.Note);
-                playing_note = note_data.Note;
+                note_data.Stroked = true;
+                playing_note = note_data;
                 playing = true;
             }
             if (Input.GetKeyUp(my_key))
             {
-                synthetizer.stopNote(playing_note);
-                playing = false;
+                stopPlaying();
             }
+            if (playing && !note_data.Stroked)
+            {
+                stopPlaying();
+            }
+
         }
         else if (playing == true)
         {
-            synthetizer.stopNote(playing_note);
-            playing = false;
+            stopPlaying();
         }
+    }
+
+    void stopPlaying()
+    {
+        synthetizer.stopNote(playing_note.Note);
+        playing_note = null;
+        playing = false;
     }
 }
