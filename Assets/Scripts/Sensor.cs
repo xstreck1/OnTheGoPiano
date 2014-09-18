@@ -31,10 +31,11 @@ public class Sensor : MonoBehaviour {
                 playing_note = note_data;
                 playing = true;
             }
-            if (Input.GetKeyUp(my_key))
+            if (playing && Input.GetKeyUp(my_key))
             {
                 stopPlaying();
             }
+            // Note has ended and new one followed just after
             if (playing && !note_data.Stroked)
             {
                 stopPlaying();
