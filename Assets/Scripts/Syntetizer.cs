@@ -28,7 +28,11 @@ public class Syntetizer : MonoBehaviour
     // is being loaded.
     void Awake()
     {
+#if UNITY_ANDROID && !UNITY_EDITOR
+        midiStreamSynthesizer = new StreamSynthesizer(44100, 1, bufferSize, 40);
+#else 
         midiStreamSynthesizer = new StreamSynthesizer(44100, 2, bufferSize, 40);
+#endif
         sampleBuffer = new float[midiStreamSynthesizer.BufferSize];
 
         midiStreamSynthesizer.LoadBank(bankFilePath);
@@ -54,7 +58,11 @@ public class Syntetizer : MonoBehaviour
     // Update is called every frame, if the
     // MonoBehaviour is enabled.
     void Update()
-    { 
+    {
+        if (Input.GetMouseButtonDown(0))
+            midiStreamSynthesizer.NoteOn(1, midiNote + 2, midiNoteVolume, midiInstrument);
+        if (Input.GetMouseButtonUp(0))
+            midiStreamSynthesizer.NoteOff(1, midiNote + 2);
     }
 
     // OnGUI is called for rendering and handling

@@ -6,10 +6,12 @@ public class Sensor : MonoBehaviour {
     Syntetizer synthetizer;
     bool playing = false;
     NoteData playing_note;
+    Animator anim;
 
 	// Use this for initialization
 	void Start () {
         synthetizer = GameObject.Find("Synthetizer").GetComponent<Syntetizer>();
+        anim = GetComponent<Animator>();
     }
 
     public void setIndex(int _index)
@@ -24,7 +26,7 @@ public class Sensor : MonoBehaviour {
         if (Physics.Raycast(transform.position, Vector3.forward, out hit_info, Mathf.Infinity, 1 << 8))
         {
             NoteData note_data = hit_info.collider.GetComponent<NoteData>();
-            if (Input.GetKeyDown(my_key) && !note_data.Stroked)
+            if (Input.GetKeyDown(my_key))
             {
                 synthetizer.playNote(note_data.Note);
                 note_data.Stroked = true;
@@ -46,6 +48,8 @@ public class Sensor : MonoBehaviour {
         {
             stopPlaying();
         }
+
+        anim.SetBool("is_pressed", Input.GetKey(my_key));
     }
 
     void stopPlaying()
