@@ -15,9 +15,10 @@ public class Stroke
 
 public class SongInterface : MonoBehaviour
 {
-    public static readonly float BPS = 5f; // Beats per second
+    public static readonly float BPS = 1f; // Beats per second
     public static readonly float BEAT_SIZE = 1.4f;
     public static readonly float BEAT_MOVE = BEAT_SIZE * BPS;
+    public static readonly float VIBE_PER_BEAT = 16f;
 
     float offset;
     Content content;
@@ -31,8 +32,27 @@ public class SongInterface : MonoBehaviour
 
     List<GameObject> notes = new List<GameObject>();
 
+    void Start()
+    {
+        content = GameObject.Find("Content").GetComponent<Content>();
+        offset = GameObject.Find("Main Camera").GetComponent<Camera>().orthographicSize;
+        note_res = Resources.Load("note");
+        vibe_res = Resources.Load("vibe");
+        sond_holder = GameObject.Find("song").transform;
+    }
+
+    void Update()
+    {
+        foreach (GameObject note in notes)
+            note.transform.Translate(Vector3.back * BEAT_MOVE * Time.deltaTime);
+        remaining_time -= Time.deltaTime;
+        if (remaining_time < 0f)
+            CreateSong(Songs.getSong(score));
+    }
+
     void CreateSong(List<Stroke> song)
     {
+        // Delete old data
         List<GameObject> notes_temp = new List<GameObject>();
         foreach (GameObject note in notes)
             if (note.activeSelf)
@@ -47,8 +67,8 @@ public class SongInterface : MonoBehaviour
         {
             // Position
             float y_pos = offset + stroke.Position * BEAT_SIZE;
-            Vector3 pos = new Vector3(content.getXpos(stroke.Note), y_pos, 0);
-            GameObject note = (GameObject)Instantiate(note_res, pos, Quaternion.Euler(-90, 0, 0));
+            Vector3 note_pos = new Vector3(content.getXpos(stroke.Note), y_pos, 0);
+            GameObject note = (GameObject)Instantiate(note_res, note_pos, Quaternion.Euler(-90, 0, 0));
 
             // Scale
             note.transform.localScale = new Vector3(BEAT_SIZE * 0.1f, 1f, stroke.Length * BEAT_SIZE * 0.1f );
@@ -66,6 +86,16 @@ public class SongInterface : MonoBehaviour
                 name = name[0] + "#";
             note.name = name;
 
+            // Add vibes
+            y_pos += BEAT_SIZE * 0.1f;
+            for (int i = 0; i < (VIBE_PER_BEAT * stroke.Length) - Mathf.Ceil(VIBE_PER_BEAT * 0.1f); i++)
+            {
+                Vector3 vibe_pos = new Vector3(content.getXpos(stroke.Note), y_pos, -0.3f);
+                GameObject vibe = (GameObject)Instantiate(vibe_res, vibe_pos, Quaternion.identity);
+                vibe.transform.parent = note.transform;
+                y_pos += BEAT_SIZE / VIBE_PER_BEAT;
+            }
+
             notes.Add(note);
 
             // Game state
@@ -73,24 +103,5 @@ public class SongInterface : MonoBehaviour
         }
 
         remaining_time = max_length / BPS;
-    }
-
-    // Use this for initialization
-    void Start()
-    {
-        content = GameObject.Find("Content").GetComponent<Content>();
-        offset = GameObject.Find("Main Camera").GetComponent<Camera>().orthographicSize;
-        note_res = Resources.Load("note");
-        sond_holder = GameObject.Find("song").transform;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        foreach (GameObject note in notes)
-            note.transform.Translate(Vector3.back * BEAT_MOVE * Time.deltaTime);
-        remaining_time -= Time.deltaTime;
-        if (remaining_time < 0f)
-            CreateSong(Songs.getSong(score));
     }
 }
