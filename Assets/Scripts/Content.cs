@@ -35,7 +35,8 @@ public class Content : MonoBehaviour
             Vector3 front_pos = new Vector3(filed_X_pos[i], - 4.0f, -1f);
             note_sensors.Add((GameObject)Instantiate(note_eraser, front_pos, Quaternion.identity));
             note_sensors[i].transform.parent = this.transform;
-            note_sensors[i].renderer.material.color = Values.colors[i] * 0.5f + Color.white * 0.5f;
+            note_sensors[i].transform.localScale = new Vector3(2f, 2f - i / 8f, 1f);
+           note_sensors[i].renderer.material.color = Values.colors[i] * 0.5f + Color.white * 0.5f;
             note_sensors[i].name = Values.field_names[i] + "_sensor";
             note_sensors[i].GetComponent<Sensor>().setIndex(i);
         }
