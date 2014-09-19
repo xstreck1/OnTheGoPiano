@@ -65,21 +65,6 @@ public class Syntetizer : MonoBehaviour
             midiStreamSynthesizer.NoteOff(1, midiNote + 2);
     }
 
-    // OnGUI is called for rendering and handling
-    // GUI events.
-    void OnGUI()
-    {
-        // Make a background box
-        GUILayout.BeginArea(new Rect(Screen.width / 2 - 150, Screen.height / 2 - 50, 300, 300));
-
-        GUILayout.Label("Play keys AWSEDFTGYHJK");
-
-        GUILayout.Box("Volume: " + Mathf.Round(midiNoteVolume));
-        midiNoteVolume = (int)GUILayout.HorizontalSlider(midiNoteVolume, 0.0f, maxSliderValue);
-        // End the Groups and Area	
-        GUILayout.EndArea();
-    }
-
     // See http://unity3d.com/support/documentation/ScriptReference/MonoBehaviour.OnAudioFilterRead.html for reference code
     //	If OnAudioFilterRead is implemented, Unity will insert a custom filter into the audio DSP chain.
     //

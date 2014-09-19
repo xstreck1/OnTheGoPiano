@@ -9,16 +9,16 @@ public class Songs : MonoBehaviour
         // diff 1
         new List<List<Stroke>>() {
             new List<Stroke>(){
-                new Stroke() { Position = 0f, Note = Note.C1, Length = 4f },
-                new Stroke() { Position = 4f, Note = Note.E1, Length = 4f },
-                new Stroke() { Position = 8f, Note = Note.G1, Length = 4f },
-                new Stroke() { Position = 12f, Note = Note.B1, Length = 4f },
+                new Stroke() { Position = 0f, Note = Note.C1, Length = 2f },
+                new Stroke() { Position = 3f, Note = Note.E1, Length = 2f },
+                new Stroke() { Position = 6f, Note = Note.G1, Length = 2f },
+                new Stroke() { Position = 9f, Note = Note.B1, Length = 2f },
             },
             new List<Stroke>(){
-                new Stroke() { Position = 0f, Note = Note.C1, Length = 4f },
-                new Stroke() { Position = 4f, Note = Note.Ds, Length = 4f },
-                new Stroke() { Position = 8f, Note = Note.G1, Length = 4f },
-                new Stroke() { Position = 12f, Note = Note.As, Length = 4f },
+                new Stroke() { Position = 0f, Note = Note.C1, Length = 2f },
+                new Stroke() { Position = 3f, Note = Note.Ds, Length = 2f },
+                new Stroke() { Position = 6f, Note = Note.G1, Length = 2f },
+                new Stroke() { Position = 9f, Note = Note.As, Length = 2f },
             }
         },
         // diff 2

@@ -28,14 +28,37 @@ public class SongInterface : MonoBehaviour
 
     float remaining_time = 0f;
 
+    readonly static float HIT_INCREASE = 1f / (VIBE_PER_BEAT * 8 * 8);
+    readonly static float MISS_DECREASE = -HIT_INCREASE;
+    readonly static float VOID_DESCREASE = -BPS / (VIBE_PER_BEAT * 8 * 8);
     float score = 0f;
 
     List<GameObject> notes = new List<GameObject>();
 
+    public void vibeHit() {
+        score += HIT_INCREASE;
+        score = Mathf.Clamp01(score);
+    }
+
+    public void vibeMiss() {
+        score += MISS_DECREASE;
+        score = Mathf.Clamp01(score);
+    }
+
+    public void voidKept(float delta_time)
+    {
+        score += delta_time * VOID_DESCREASE;
+        score = Mathf.Clamp01(score);
+    }
+
     void Start()
     {
         content = GameObject.Find("Content").GetComponent<Content>();
+#if UNITY_EDITOR
+        offset = 0;
+#else
         offset = GameObject.Find("Main Camera").GetComponent<Camera>().orthographicSize;
+#endif
         note_res = Resources.Load("note");
         vibe_res = Resources.Load("vibe");
         sond_holder = GameObject.Find("song").transform;
@@ -103,5 +126,12 @@ public class SongInterface : MonoBehaviour
         }
 
         remaining_time = max_length / BPS;
+    }
+
+    // OnGUI is called for rendering and handling
+    // GUI events.
+    void OnGUI()
+    {
+        GUILayout.Box("Score: " + score);
     }
 }
