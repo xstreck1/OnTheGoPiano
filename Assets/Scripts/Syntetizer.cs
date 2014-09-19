@@ -80,26 +80,6 @@ public class Syntetizer : MonoBehaviour
         GUILayout.EndArea();
     }
 
-    // This function is called when the object
-    // becomes enabled and active.
-    void OnEnable()
-    {
-
-    }
-
-    // This function is called when the behaviour
-    // becomes disabled () or inactive.
-    void OnDisable()
-    {
-
-    }
-
-    // Reset to default values.
-    void Reset()
-    {
-
-    }
-
     // See http://unity3d.com/support/documentation/ScriptReference/MonoBehaviour.OnAudioFilterRead.html for reference code
     //	If OnAudioFilterRead is implemented, Unity will insert a custom filter into the audio DSP chain.
     //
@@ -125,16 +105,4 @@ public class Syntetizer : MonoBehaviour
             data[i] = sampleBuffer[i] * gain;
         }
     }
-
-    public void MidiNoteOnHandler(int channel, int note, int velocity)
-    {
-        Debug.Log("NoteOn: " + note.ToString() + " Velocity: " + velocity.ToString());
-    }
-
-    public void MidiNoteOffHandler(int channel, int note)
-    {
-        Debug.Log("NoteOff: " + note.ToString());
-    }
-
-
 }

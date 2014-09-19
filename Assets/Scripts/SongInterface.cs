@@ -22,6 +22,7 @@ public class SongInterface : MonoBehaviour
     float offset;
     Content content;
     Object note_res;
+    Object vibe_res;
     Transform sond_holder;
 
     float remaining_time = 0f;
@@ -41,7 +42,7 @@ public class SongInterface : MonoBehaviour
         notes = notes_temp;
 
 
-                float max_length = 0f;
+        float max_length = 0f;
         foreach (Stroke stroke in song)
         {
             // Position
