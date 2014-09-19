@@ -25,27 +25,83 @@ public class Songs : MonoBehaviour
         new List<List<Stroke>>() {
             new List<Stroke>(){
                 new Stroke() { Position = 0f, Note = Note.C1, Length = 2f },
-                new Stroke() { Position = 0f, Note = Note.G1, Length = 2f },
+                new Stroke() { Position = 3f, Note = Note.G1, Length = 2f },
+                new Stroke() { Position = 6f, Note = Note.C1, Length = 2f },
+                new Stroke() { Position = 9f, Note = Note.E1, Length = 2f },
+                new Stroke() { Position = 12f, Note = Note.D1, Length = 2f },
+                new Stroke() { Position = 15f, Note = Note.C1, Length = 2f },
+            },
+            new List<Stroke>(){
                 new Stroke() { Position = 0f, Note = Note.C1, Length = 2f },
                 new Stroke() { Position = 0f, Note = Note.E1, Length = 2f },
-                new Stroke() { Position = 0f, Note = Note.D1, Length = 2f },
-                new Stroke() { Position = 0f, Note = Note.C1, Length = 2f },
+                new Stroke() { Position = 3f, Note = Note.C1, Length = 2f },
+                new Stroke() { Position = 3f, Note = Note.G1, Length = 2f },
+                new Stroke() { Position = 6f, Note = Note.C1, Length = 2f },
+                new Stroke() { Position = 6f, Note = Note.E1, Length = 2f },
+                new Stroke() { Position = 9f, Note = Note.G1, Length = 2f },
+                new Stroke() { Position = 12f, Note = Note.E1, Length = 2f },
+                new Stroke() { Position = 15f, Note = Note.C1, Length = 2f },
             }
         },
         // diff 3
         new List<List<Stroke>>() {
             new List<Stroke>(){
                 new Stroke() { Position = 0f, Note = Note.C1, Length = 1f },
-                new Stroke() { Position = 3f, Note = Note.E1, Length = 1f },
-                new Stroke() { Position = 4f, Note = Note.G1, Length = 1f },
-                new Stroke() { Position = 5f, Note = Note.C1, Length = 1f },
-                new Stroke() { Position = 6f, Note = Note.E1, Length = 1f },
-                new Stroke() { Position = 7f, Note = Note.G1, Length = 1f },
+                new Stroke() { Position = 1f, Note = Note.E1, Length = 1f },
+                new Stroke() { Position = 2f, Note = Note.G1, Length = 1f },
+                new Stroke() { Position = 3f, Note = Note.C1, Length = 1f },
+                new Stroke() { Position = 4f, Note = Note.E1, Length = 1f },
+                new Stroke() { Position = 5f, Note = Note.G1, Length = 1f },
+            },
+            new List<Stroke>(){
+                new Stroke() { Position = 0f, Note = Note.C1, Length = 2f },
+                new Stroke() { Position = 0f, Note = Note.Ds, Length = 2f },
+                new Stroke() { Position = 0f, Note = Note.G1, Length = 2f },
+                new Stroke() { Position = 3f, Note = Note.C1, Length = 1f },
+                new Stroke() { Position = 4f, Note = Note.E1, Length = 1f },
+                new Stroke() { Position = 5f, Note = Note.G1, Length = 1f },
             }
         },
         // diff 4
         new List<List<Stroke>>() {
             new List<Stroke>(){
+                new Stroke() { Position = 0f, Note = Note.E1, Length = 0.5f },
+                new Stroke() { Position = 0.5f, Note = Note.E1, Length = 0.5f },
+                new Stroke() { Position = 1f, Note = Note.D1, Length = 0.5f },
+                new Stroke() { Position = 1.5f, Note = Note.E1, Length = 0.5f },
+                new Stroke() { Position = 2f, Note = Note.F1, Length = 1f },
+                new Stroke() { Position = 3f, Note = Note.D1, Length = 1f },
+                new Stroke() { Position = 4f, Note = Note.E1, Length = 0.5f },
+                new Stroke() { Position = 4.5f, Note = Note.E1, Length = 0.5f },
+                new Stroke() { Position = 5f, Note = Note.D1, Length = 0.5f },
+                new Stroke() { Position = 5.5f, Note = Note.E1, Length = 0.5f },
+                new Stroke() { Position = 6f, Note = Note.F1, Length = 1f },
+                new Stroke() { Position = 7f, Note = Note.D1, Length = 1f },
+                new Stroke() { Position = 8f, Note = Note.E1, Length = 1f },
+                new Stroke() { Position = 9f, Note = Note.D1, Length = 1f },
+                new Stroke() { Position = 10f, Note = Note.C1, Length = 1f },
+            },
+            new List<Stroke>(){
+                new Stroke() { Position = 0f, Note = Note.C1, Length = 0.5f },
+                new Stroke() { Position = 0.5f, Note = Note.C1, Length = 0.5f },
+                new Stroke() { Position = 1f, Note = Note.E1, Length = 0.5f },
+                new Stroke() { Position = 1.5f, Note = Note.F1, Length = 0.5f },
+                new Stroke() { Position = 2f, Note = Note.D1, Length = 0.5f },
+                new Stroke() { Position = 2.5f, Note = Note.E1, Length = 0.5f },
+                new Stroke() { Position = 3f, Note = Note.C2, Length = 0.5f },
+                new Stroke() { Position = 3.5f, Note = Note.C2, Length = 0.5f },
+                new Stroke() { Position = 4f, Note = Note.E1, Length = 0.5f },
+                new Stroke() { Position = 4.5f, Note = Note.F1, Length = 0.5f },
+                new Stroke() { Position = 5f, Note = Note.D1, Length = 0.5f },
+                new Stroke() { Position = 5.5f, Note = Note.E1, Length = 0.5f },
+                new Stroke() { Position = 6f, Note = Note.C2, Length = 0.5f },
+                new Stroke() { Position = 6f, Note = Note.C1, Length = 0.5f },
+                new Stroke() { Position = 6.5f, Note = Note.C2, Length = 0.5f },
+                new Stroke() { Position = 6.5f, Note = Note.C1, Length = 0.5f },
+                new Stroke() { Position = 6f, Note = Note.E1, Length = 0.5f },
+                new Stroke() { Position = 6.5f, Note = Note.F1, Length = 0.5f },
+                new Stroke() { Position = 7f, Note = Note.D1, Length = 0.5f },
+                new Stroke() { Position = 7.5f, Note = Note.E1, Length = 0.5f },
             }
         },
         // diff 5
@@ -75,6 +131,12 @@ public class Songs : MonoBehaviour
         int level = (int)Mathf.Floor(score * songs.Count);
         int index = Random.Range(0, songs[level].Count);
         Debug.Log("Level " + level + " song " + index);
+        return songs[level][index];
+    }
+
+    // Debug only
+    public static List<Stroke> getSong(int level, int index)
+    {
         return songs[level][index];
     }
 }

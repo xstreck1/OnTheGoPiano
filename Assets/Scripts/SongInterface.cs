@@ -20,13 +20,17 @@ public class SongInterface : MonoBehaviour
     public static readonly float BEAT_MOVE = BEAT_SIZE * BPS;
     public static readonly float VIBE_PER_BEAT = 16f;
 
+    // Testing only
+    public int init_level = 0; 
+    public int init_song = 0;
+
     float offset;
     Content content;
     Object note_res;
     Object vibe_res;
     Transform sond_holder;
 
-    float remaining_time = 0f;
+    float remaining_time = 0.00001f;
 
     readonly static float HIT_INCREASE = 1f / (VIBE_PER_BEAT * 8 * 8);
     readonly static float MISS_DECREASE = -HIT_INCREASE;
@@ -62,6 +66,7 @@ public class SongInterface : MonoBehaviour
         note_res = Resources.Load("note");
         vibe_res = Resources.Load("vibe");
         sond_holder = GameObject.Find("song").transform;
+        CreateSong(Songs.getSong(init_level, init_song));
     }
 
     void Update()

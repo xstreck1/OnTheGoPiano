@@ -16,7 +16,7 @@ public class UnitySynthTest : MonoBehaviour
 	public int bufferSize = 1024;
 	public int midiNote = 60;
 	public int midiNoteVolume = 100;
-	public int midiInstrument = 1;
+	public int midiInstrument = 0;
 	//Private 
 	private float[] sampleBuffer;
 	private float gain = 1f;
