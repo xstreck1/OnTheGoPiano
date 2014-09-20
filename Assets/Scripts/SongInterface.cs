@@ -67,7 +67,9 @@ public class SongInterface : MonoBehaviour
         note_res = Resources.Load("note");
         vibe_res = Resources.Load("vibe");
         sond_holder = GameObject.Find("song").transform;
+#if UNITY_EDITOR
         CreateSong(Songs.getSong(init_level, init_song));
+#endif
     }
 
     void Update()
@@ -132,12 +134,5 @@ public class SongInterface : MonoBehaviour
         }
 
         remaining_time = max_length / BPS;
-    }
-
-    // OnGUI is called for rendering and handling
-    // GUI events.
-    void OnGUI()
-    {
-        GUILayout.Box("Score: " + score);
     }
 }
