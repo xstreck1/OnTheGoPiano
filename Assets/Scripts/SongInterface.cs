@@ -35,7 +35,8 @@ public class SongInterface : MonoBehaviour
     readonly static float HIT_INCREASE = 1f / (VIBE_PER_BEAT * 8 * 8);
     readonly static float MISS_DECREASE = -HIT_INCREASE;
     readonly static float VOID_DESCREASE = -BPS / (VIBE_PER_BEAT * 8 * 8);
-    float score = 0f;
+    public float score = 0f;
+
 
     List<GameObject> notes = new List<GameObject>();
 

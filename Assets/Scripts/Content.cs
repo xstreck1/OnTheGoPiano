@@ -8,6 +8,7 @@ public class Content : MonoBehaviour
 
     List<GameObject> note_backs = new List<GameObject>(8);
     List<GameObject> note_sensors = new List<GameObject>(8);
+    List<GameObject> score_measure = new List<GameObject>(7);
     List<float> filed_X_pos = new List<float>(8);
     
     public float getXpos(Note note)
@@ -18,10 +19,11 @@ public class Content : MonoBehaviour
     void Awake()
     {
         var note_back = Resources.Load("field");
+        var note_eraser = Resources.Load("sensor");
+        var score_res = Resources.Load("score");
         GameObject temp = (GameObject)Instantiate(note_back, Vector3.zero, Quaternion.Euler(-90, 0, 0));
         float width = temp.transform.localScale.x * 10f;
         Destroy(temp);
-        var note_eraser = Resources.Load("sensor");
         foreach (int i in Enumerable.Range(0, 8))
         {
             filed_X_pos.Add(width * (-3.5f + i));
@@ -36,9 +38,17 @@ public class Content : MonoBehaviour
             note_sensors.Add((GameObject)Instantiate(note_eraser, front_pos, Quaternion.identity));
             note_sensors[i].transform.parent = this.transform;
             note_sensors[i].transform.localScale = new Vector3(2f, 2f - i / 8f, 1f);
-           note_sensors[i].renderer.material.color = Values.colors[i] * 0.5f + Color.white * 0.5f;
+            note_sensors[i].renderer.material.color = Values.colors[i] * 0.1f + Color.white * 0.9f;
             note_sensors[i].name = Values.field_names[i] + "_sensor";
             note_sensors[i].GetComponent<Sensor>().setIndex(i);
+        }
+        foreach (int i in Enumerable.Range(0, 7))
+        {
+            filed_X_pos.Add(width * (-3.5f + i));
+            Vector3 score_pos = new Vector3((filed_X_pos[i] + filed_X_pos[i + 1]) / 2f, 0, 0);
+            score_measure.Add((GameObject)Instantiate(score_res, score_pos, Quaternion.identity));
+            score_measure[i].transform.parent = this.transform;
+            score_measure[i].name = "score_" + i;
         }
     }
 
